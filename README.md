@@ -1,3 +1,12 @@
+# 使い方
+
+```shell
+./new_gin.sh プロジェクト名 ディレクトリ名
+```
+
+とすると
+gin + gorm + mysql のディレクトリをざっくり作るよ
+
 # app_name
 
 ## Getting Started（開始方法）
@@ -33,17 +42,3 @@ $ cd api && go run main.go
 ## Deployment（デプロイ）
 
 デプロイをする方法やどのような構成担っているかを説明する
-
-## docs
-
-## アーキテクチャ
-
-ddd アーキテクチャ
-
-### er 図
-
-<img width="459" alt="スクリーンショット 2020-06-19 16.04.26.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/281558/2c60b4b0-224d-7341-949c-154802369c41.png">
-
-### api モック
-
-https://stoplight.io/p/docs/gh/ca21engineer/app_name/reference/main.v1.yaml/components/schemas/Round_Score?srn=gh/ca21engineer/app_name/reference/main.v1.yaml/components/schemas/Round_Score&group=master
