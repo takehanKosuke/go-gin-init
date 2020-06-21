@@ -7,6 +7,41 @@
 とすると
 gin + gorm + mysql のディレクトリをざっくり作るよ
 
+作成ソースツリー
+
+```
+│
+├── Makefile
+├── README.md
+├── api
+│   ├── Dockerfile
+│   ├── config
+│   │   ├── database.go
+│   │   └── util.go
+│   ├── db
+│   │   ├── conf.d
+│   │   │   └── mysql.conf
+│   │   └── migrations
+│   ├── go.mod
+│   ├── go.sum
+│   ├── handler
+│   ├── lib
+│   ├── log
+│   │   └── mysql
+│   ├── main.go
+│   ├── models
+│   │   ├── repositories
+│   │   └── services
+│   └── responses
+│       └── error.go
+├── docker-compose.yml
+├── new_gin.sh
+├── swagger
+│   ├── Dockerfile
+│   └── swagger.yml
+└── terraform
+```
+
 # app_name
 
 ## Getting Started（開始方法）

@@ -27,7 +27,9 @@ mkdir -p $make_path/$project_name
 cp -R ./ $make_path/$project_name
 
 # 移動後app_nameとなっているところを全てaaaに変更
-find $make_path/$project_name -name "*.yml" -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
-find $make_path/$project_name -name "*.go" -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
-find $make_path/$project_name -name "*.md" -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
-find $make_path/$project_name -name "Makefile" -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
+find $make_path/$project_name -type f -name "*.yml" -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
+find $make_path/$project_name -type f -name "*.go" -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
+find $make_path/$project_name -type f -name "*.md" -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
+find $make_path/$project_name -type f -name "Makefile" -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
+
+find $make_path/$project_name -type f -name "*-e" -exec rm {} \;
