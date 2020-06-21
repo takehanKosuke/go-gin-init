@@ -1,0 +1,189 @@
+openapi: 3.0.0
+info:
+  title: ここにはアプリのタイトルを入れます
+  version: 1.0.0
+  description: ここにはアプリの説明文が入ります
+servers:
+  - url: http://localhost:3000/
+    description: ローカルサーバ
+paths:
+  /user:
+    get:
+      tags:
+        - "user"
+      summary: "user一覧を表示する"
+      description: "ここはAPIの詳細を書きます"
+      operationId: "getUserAll"
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - "user"
+      summary: "userを新規作成する"
+      description: "ここはAPIの詳細を書きます"
+      operationId: "createUser"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: "string"
+                email:
+                  type: "string"
+                  format: "email"
+                rating:
+                  type: "number"
+                  format: "float"
+                is_accept:
+                  type: "boolean"
+              required:
+                - name
+                - email
+      responses:
+        200:
+          description: "特定のuserを返します"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /user/{id}:
+    get:
+      tags:
+        - "user"
+      summary: "idで特定のuserを返します"
+      description: "ここはAPIの詳細を書きます"
+      operationId: "getUserByName"
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "特定のuserを返します"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    put:
+      tags:
+        - "user"
+      summary: "userの更新"
+      description: "ここはAPIの詳細を書きます"
+      operationId: "updateUser"
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: "string"
+                email:
+                  type: "string"
+                  format: "email"
+                rating:
+                  type: "number"
+                  format: "float"
+                is_accept:
+                  type: "boolean"
+      responses:
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - "user"
+      summary: "userの削除"
+      description: "ここはAPIの詳細を書きます"
+      operationId: "deleteUser"
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+components:
+  responses:
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        name:
+          type: "string"
+        email:
+          type: "string"
+          format: "email"
+        rating:
+          type: "number"
+          format: "float"
+        is_accept:
+          type: "boolean"
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message

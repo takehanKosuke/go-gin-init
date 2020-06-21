@@ -1,0 +1,36 @@
+version: "3"
+services:
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: ./api/Dockerfile
+  #   restart: always
+  #   container_name: app_name-api
+  #   ports:
+  #     - "8080:8080"
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    container_name: app_name-mysql
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app_name
+    hostname: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./api/db/conf.d:/etc/mysql/conf.d
+      - ./api/log/mysql:/var/log/mysql
+  swagger:
+    build:
+      context: .
+      dockerfile: ./swagger/Dockerfile
+    container_name: app_name-swagger
+    volumes:
+      - ./docker/swagger/swagger.yml:/usr/share/nginx/html/sample.yaml
+    environment:
+      API_URL: sample.yaml
+    ports:
+      - "3000:8080" # `http://localhost:3000/` で起動
