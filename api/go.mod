@@ -1,4 +1,4 @@
-module app_name
+module app_name/api
 
 go 1.14
 
