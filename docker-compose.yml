@@ -29,7 +29,7 @@ services:
       dockerfile: ./swagger/Dockerfile
     container_name: app_name-swagger
     volumes:
-      - ./docker/swagger/swagger.yml:/usr/share/nginx/html/sample.yaml
+      - ./swagger/swagger.yml:/usr/share/nginx/html/sample.yaml
     environment:
       API_URL: sample.yaml
     ports:
