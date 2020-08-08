@@ -7,14 +7,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	config.ConnectDB()
-
+func setupRouter() *gin.Engine {
 	r := gin.Default()
 
 	defo := handlers.NewDefault()
 
 	r.GET("/", defo.Ping)
 
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	return r
+}
+
+func main() {
+	// db接続
+	config.ConnectDB()
+
+	r := setupRouter()
+
+	err := r.Run(":8080")
+	if err != nil {
+		panic(err)
+	}
 }

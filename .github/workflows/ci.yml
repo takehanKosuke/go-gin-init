@@ -3,8 +3,7 @@ name: go-ci
 on: [push]
 
 jobs:
-  test:
-    name: Format
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: set up
@@ -21,10 +20,20 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      - name: install lint
-        run: GO111MODULE=on go get -u golang.org/x/lint/golint
-      - name: lint
-        run: ~/go/bin/golint ./...
+  format:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v1
+        with:
+          version: v1.29
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: test
         working-directory: ./api
         run: go test ./... -v

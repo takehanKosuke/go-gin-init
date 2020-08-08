@@ -30,3 +30,6 @@ cp -R ./ $make_path/$project_name
 LC_ALL=C find $make_path/$project_name -type f -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
 
 find $make_path/$project_name -type f -name "*-e" -exec rm {} \;
+
+# このファイルを削除
+rm ./new_gin.sh
