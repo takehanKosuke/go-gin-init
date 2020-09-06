@@ -3,3 +3,5 @@
 go.sum
 log/**/*
 .idea
+cover.html
+cover.out

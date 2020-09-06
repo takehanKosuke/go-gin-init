@@ -20,6 +20,6 @@ func NewDefault() Default {
 // Ping 初期デフォルトエンドポイント
 func (d *DefaultImpl) Ping(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"message": "Gin",
+		"message": "pong",
 	})
 }
