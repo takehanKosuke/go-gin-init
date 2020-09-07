@@ -5,3 +5,6 @@ log/**/*
 .idea
 cover.html
 cover.out
+terraform.tfstate
+terraform.tfvars
+.terraform

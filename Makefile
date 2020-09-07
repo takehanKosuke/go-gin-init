@@ -26,3 +26,9 @@ ssh-api:
 
 ssh-mysql:
 	docker exec -it app_name-mysql /bin/bash
+
+# terraform:
+# 	terraform init
+# 	terraform plan
+	# applyは手動でやること
+	# terraform apply
