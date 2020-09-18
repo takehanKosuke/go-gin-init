@@ -7,15 +7,15 @@ import (
 )
 
 type Config struct {
-	DB DBConfig `yaml:mysql`
+	Mysql Mysql `yaml:"mysql"`
 }
 
-type DBConfig struct {
-	User string `yaml:user`
-	Pass string `yaml:pass`
-	Host string `yaml:host`
-	Port string `yaml:port`
-	Database string `yaml:database`
+type Mysql struct {
+	User     string `yaml:"user"`
+	Pass     string `yaml:"pass"`
+	Host     string `yaml:"host"`
+	Port     string `yaml:"port"`
+	Database string `yaml:"database"`
 }
 
 func Load() (*Config, error) {
