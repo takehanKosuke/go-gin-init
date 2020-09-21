@@ -1,11 +1,8 @@
 # !/bin/bash
 
-# コマンドの打たれ方
-# aaa=プロジェクト名
-# bbb=ディレクトリ指定（デフォルトは"../"）
-# ./new_gin aaa bbb
+read -p "プロジェクト名を入力してください: " project_name
 
-project_name=$1
+echo $project_name
 
 # もしプロジェクト名がなかったら終了
 if [ $# = 0 ]; then
@@ -13,10 +10,10 @@ if [ $# = 0 ]; then
   exit;
 fi
 
-make_path=$2
+read -p "作成するディレクトリを入力してください（指定がない場合は./配下に作成されます）: " make_path
 
 # もしpath指定がなかったら"../"を指定
-if [ $# = 1  ]; then
+if [[ $make_path = ""  ]]; then
   make_path="../"
 fi
 
@@ -30,6 +27,11 @@ cp -R ./ $make_path/$project_name
 LC_ALL=C find $make_path/$project_name -type f -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
 
 find $make_path/$project_name -type f -name "*-e" -exec rm {} \;
+
+# 最初に使用するためのmakeファイルを削除
+sed -e '1,3d' Makefile > ./Makefiletmp
+rm Makefile
+mv ./Makefiletmp ./Makefile
 
 # このファイルを削除
 rm ./new_gin.sh
