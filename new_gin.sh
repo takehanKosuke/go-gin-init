@@ -30,5 +30,11 @@ find $make_path/$project_name -type f -name "*-e" -exec rm {} \;
 sed -e '1,3d' $make_path/$project_name/Makefile > $make_path/$project_name/Makefiletmp
 mv $make_path/$project_name/Makefiletmp $make_path/$project_name/Makefile
 
+# terraformの秘匿ファイルを作成
+echo << EOS
+aws_access_key = "awsアクセスキー"
+aws_secret_key = "awsシークレットアクセスキー"
+EOS >> $make_path/terraform.tfstate
+
 # このファイルを削除
 rm $make_path/$project_name/new_gin.sh

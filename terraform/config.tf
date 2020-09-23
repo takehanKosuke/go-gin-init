@@ -1,5 +1,8 @@
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
+variable "project_name" {
+  default = "app_name"
+}
 
 provider "aws" {
   version    = "~> 3.0"
