@@ -13,13 +13,13 @@ import (
 var DB *gorm.DB
 
 // ConnectDB connect db
-func ConnectDB() {
+func ConnectDB(cfg *Config) {
 	connect := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
-		GetEnvString("MYSQL_USER", "root"),
-		GetEnvString("MYSQL_PASS", "password"),
-		GetEnvString("MYSQL_HOST", "127.0.0.1"),
-		GetEnvString("MYSQL_PORT", "3306"),
-		GetEnvString("MYSQL_DATABASE", "app_name"),
+		cfg.Mysql.User,
+		cfg.Mysql.Pass,
+		cfg.Mysql.Host,
+		cfg.Mysql.Port,
+		cfg.Mysql.Database,
 	)
 	var err error
 

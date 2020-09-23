@@ -1,7 +1,7 @@
 # 使い方(setup)
 
 ```shell
-./new_gin.sh プロジェクト名 ディレクトリ名
+make new
 ```
 
 とすると
@@ -10,36 +10,43 @@ gin + gorm + mysql のディレクトリをざっくり作るよ
 作成ソースツリー
 
 ```
-│
+.
+├── Dockerfile
 ├── Makefile
 ├── README.md
 ├── api
-│   ├── Dockerfile
 │   ├── config
+│   │   ├── config.yaml
 │   │   ├── database.go
-│   │   └── util.go
+│   │   └── definition.go
 │   ├── db
 │   │   ├── conf.d
 │   │   │   └── mysql.conf
 │   │   └── migrations
-│   ├── go.mod
-│   ├── go.sum
-│   ├── handler
-│   ├── lib
+│   ├── handlers
+│   │   ├── default.go
+│   │   └── default_test.go
 │   ├── log
 │   │   └── mysql
 │   ├── main.go
+│   ├── middlewares
 │   ├── models
 │   │   ├── repositories
 │   │   └── services
 │   └── responses
 │       └── error.go
+├── docker
+│   └── swagger
+│       └── swagger.yml
 ├── docker-compose.yml
-├── new_gin.sh
+├── go.mod
+├── go.sum
 ├── swagger
 │   ├── Dockerfile
 │   └── swagger.yml
 └── terraform
+    ├── config.tf
+    └── ecr.tf
 ```
 
 # app_name
