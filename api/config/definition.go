@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/spf13/viper"
 )
@@ -19,17 +20,21 @@ type Mysql struct {
 }
 
 func Load() (*Config, error) {
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath("api/config/")
-	err := viper.ReadInConfig()
+	v := viper.New()
+	v.SetConfigName("config")
+	v.SetConfigType("yaml")
+	v.AddConfigPath("api/config/")
+
+	v.AutomaticEnv()
+	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	err := v.ReadInConfig()
 	if err != nil {
 		return nil, fmt.Errorf("read error: %s \n", err)
 	}
 
 	var cfg Config
 
-	err = viper.Unmarshal(&cfg)
+	err = v.Unmarshal(&cfg)
 	if err != nil {
 		return nil, fmt.Errorf("server error: %s \n", err)
 	}
