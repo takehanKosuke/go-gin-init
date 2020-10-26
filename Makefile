@@ -1,5 +1,4 @@
 new:
-	export LANG=C
 	./new_gin.sh
 
 up:
