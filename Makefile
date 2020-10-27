@@ -35,3 +35,15 @@ ssh-mysql:
 # 	terraform plan
 	# applyは手動でやること
 	# terraform apply
+
+new:
+	./scripts/new_migration.sh
+
+migrate-up:
+	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/versus' up
+
+migrate-down:
+	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/versus' down
+
+migrate-ver:
+	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/versus' version

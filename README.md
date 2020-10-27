@@ -67,6 +67,11 @@ or
 $ cd api && go run main.go
 ```
 
+migrationファイル作成のためのbrew
+```shell
+$ brew install golang-migrate
+```
+
 ### Prerequisites（前提条件）
 
 使用言語やフレームワーク
