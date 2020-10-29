@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -13,15 +13,15 @@ import (
 func TestPing(t *testing.T) {
 	t.Parallel()
 	asserts := assert.New(t)
-	tests := []struct{
-		name string
+	tests := []struct {
+		name         string
 		outputStatus int
-		outputJSON string
+		outputJSON   string
 	}{
 		{
-			name: "適切にレスポンスが帰ってくる",
+			name:         "適切にレスポンスが帰ってくる",
 			outputStatus: 200,
-			outputJSON: `{"message":"pong"}`,
+			outputJSON:   `{"message":"pong"}`,
 		},
 	}
 	for _, td := range tests {
