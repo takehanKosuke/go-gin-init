@@ -22,9 +22,8 @@ mkdir -p $make_path/$project_name
 cp -R ./ $make_path/$project_name
 
 # 移動後app_nameとなっているところを全てaaaに変更
-LC_ALL=C find $make_path/$project_name -type f -print0 | xargs -0 sed  -i -e "s/app_name/$project_name/g"
-
-find $make_path/$project_name -type f -name "*-e" -exec rm {} \;
+grep -lr 'app_name' $make_path/$project_name/ | xargs sed -i -e "s/app_name/${project_name}/g"
+find $make_path/$project_name/* -name "*-e" -exec rm {} \;
 
 # 最初に使用するためのmakeファイルを削除
 sed -e '1,3d' $make_path/$project_name/Makefile > $make_path/$project_name/Makefiletmp

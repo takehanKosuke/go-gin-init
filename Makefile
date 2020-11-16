@@ -36,8 +36,8 @@ ssh-mysql:
 	# applyは手動でやること
 	# terraform apply
 
-new:
-	./scripts/new_migration.sh
+# new:
+# 	./scripts/new_migration.sh
 
 migrate-up:
 	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/versus' up
