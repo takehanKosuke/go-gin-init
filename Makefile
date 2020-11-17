@@ -40,10 +40,10 @@ ssh-mysql:
 # 	./scripts/new_migration.sh
 
 migrate-up:
-	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/versus' up
+	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' up
 
 migrate-down:
-	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/versus' down
+	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' down
 
 migrate-ver:
-	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/versus' version
+	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' version
