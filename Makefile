@@ -10,7 +10,7 @@ down:
 local:
 	# docker build -t app_name-api ./api
 	# docker run -e MYSQL_HOST=host.docker.internal --rm --name app_name-api_1 -p 8080:8080 app_name-api
-	go run ./api/main.go
+	go run ./api/main.go ./api/wire_gen.go
 
 # テストカバレッジをhtmlで表示する
 cover:

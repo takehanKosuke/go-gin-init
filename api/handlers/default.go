@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"app_name/api/services"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,11 +12,15 @@ type Default interface {
 }
 
 // DefaultImpl DefaultImpl struct
-type DefaultImpl struct{}
+type DefaultImpl struct {
+	service services.Default
+}
 
 // NewDefault 新規Default structを作成
-func NewDefault() Default {
-	return &DefaultImpl{}
+func NewDefault(service services.Default) Default {
+	return &DefaultImpl{
+		service: service,
+	}
 }
 
 // Ping 初期デフォルトエンドポイント

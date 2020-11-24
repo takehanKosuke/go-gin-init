@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
 )
 
@@ -17,6 +18,7 @@ type Mysql struct {
 	Host     string `yaml:"host"`
 	Port     string `yaml:"port"`
 	Database string `yaml:"database"`
+	DB       *gorm.DB
 }
 
 func Load() (*Config, error) {

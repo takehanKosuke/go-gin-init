@@ -9,11 +9,8 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// DB のグローバル変数
-var DB *gorm.DB
-
 // ConnectDB connect db
-func ConnectDB(cfg *Config) {
+func ConnectDB(cfg *Config) *gorm.DB {
 	connect := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 		cfg.Mysql.User,
 		cfg.Mysql.Pass,
@@ -23,9 +20,10 @@ func ConnectDB(cfg *Config) {
 	)
 	var err error
 
-	DB, err = gorm.Open("mysql", connect)
+	db, err := gorm.Open("mysql", connect)
 
 	if err != nil {
 		panic(err.Error())
 	}
+	return db
 }
