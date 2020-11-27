@@ -1,11 +1,15 @@
 package handlers
 
 import (
+	"app_name/api/config"
+	"app_name/api/repositories"
+	"app_name/api/services"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -13,6 +17,13 @@ import (
 func TestPing(t *testing.T) {
 	t.Parallel()
 	asserts := assert.New(t)
+	cfg, err := config.Load()
+	if err != nil {
+		panic(err)
+	}
+
+	db := config.ConnectDB(cfg)
+
 	tests := []struct {
 		name         string
 		outputStatus int
@@ -33,7 +44,7 @@ func TestPing(t *testing.T) {
 			req, _ := http.NewRequest("GET", "/", nil)
 			ginContext.Request = req
 
-			NewDefault().Ping(ginContext)
+			NewDefault(services.NewDefault(repositories.NewDefault(db))).Ping(ginContext)
 			asserts.Equal(td.outputStatus, recorder.Code)
 			if td.outputJSON != "" {
 				asserts.JSONEq(td.outputJSON, recorder.Body.String())

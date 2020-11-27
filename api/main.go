@@ -24,10 +24,10 @@ func NewAPIApplication(cfg *config.Config, router *gin.Engine, db *gorm.DB) APIA
 	}
 }
 
-func setupRouter(cfg *config.Config) *gin.Engine {
+func setupRouter(db *gorm.DB) *gin.Engine {
 	r := gin.Default()
 
-	defo := handlers.NewDefault(services.NewDefault(repositories.NewDefault(cfg)))
+	defo := handlers.NewDefault(services.NewDefault(repositories.NewDefault(db)))
 
 	r.GET("/", defo.Ping)
 

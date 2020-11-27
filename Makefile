@@ -12,6 +12,9 @@ local:
 	# docker run -e MYSQL_HOST=host.docker.internal --rm --name app_name-api_1 -p 8080:8080 app_name-api
 	go run ./api/main.go ./api/wire_gen.go
 
+generate:
+	go generate ./...
+
 # テストカバレッジをhtmlで表示する
 cover:
 	go test -cover ./... -coverprofile=cover.out.tmp

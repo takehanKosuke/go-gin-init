@@ -16,8 +16,8 @@ func InitializeApplication() (APIApplication, error) {
 	if err != nil {
 		return APIApplication{}, err
 	}
-	engine := setupRouter(configConfig)
 	db := config.ConnectDB(configConfig)
+	engine := setupRouter(db)
 	apiApplication := NewAPIApplication(configConfig, engine, db)
 	return apiApplication, nil
 }

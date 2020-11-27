@@ -1,8 +1,6 @@
 package repositories
 
 import (
-	"app_name/api/config"
-
 	"github.com/jinzhu/gorm"
 )
 
@@ -14,8 +12,8 @@ type DefaultImpl struct {
 	db *gorm.DB
 }
 
-func NewDefault(cfg *config.Config) Default {
-	return &DefaultImpl{db: cfg.Mysql.DB}
+func NewDefault(db *gorm.DB) Default {
+	return &DefaultImpl{db: db}
 }
 
 func (d *DefaultImpl) Ping() {}
