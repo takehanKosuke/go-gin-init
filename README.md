@@ -1,7 +1,7 @@
 # 使い方(setup)
 
 ```shell
-make new # "sed: RE error: illegal byte sequence" の文字が出たら `export LANG=C` を実行すること
+make new
 ```
 
 とすると

@@ -1,5 +1,5 @@
-new:
-	./new_gin.sh
+# new:
+# 	./new_gin.sh
 
 up:
 	docker-compose up --build -d
@@ -39,14 +39,17 @@ ssh-mysql:
 	# applyは手動でやること
 	# terraform apply
 
-# new:
-# 	./scripts/new_migration.sh
+new:
+	./scripts/new_migration.sh
+
+models:
+	./scripts/new_model.sh
 
 migrate-up:
-	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' up
+	migrate -source file://docker/mysql/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' up
 
 migrate-down:
-	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' down
+	migrate -source file://docker/mysql/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' down
 
 migrate-ver:
-	migrate -source file://api/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' version
+	migrate -source file://docker/mysql/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' version

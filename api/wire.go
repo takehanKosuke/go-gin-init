@@ -12,7 +12,7 @@ func InitializeApplication() (APIApplication, error) {
 	wire.Build(
 		NewAPIApplication,
 		config.Load,
-		setupRouter,
+		config.SetupRouter,
 		config.ConnectDB,
 	)
 	return APIApplication{}, nil

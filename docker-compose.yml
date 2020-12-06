@@ -3,7 +3,7 @@ services:
   # api:
   #   build:
   #     context: .
-  #     dockerfile: ./api/Dockerfile
+  #     dockerfile: ./Dockerfile
   #   restart: always
   #   container_name: app_name-api
   #   ports:
@@ -21,8 +21,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./api/db/conf.d:/etc/mysql/conf.d
-      - ./api/log/mysql:/var/log/mysql
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - ./docker/mysql/log:/var/log/mysql
   swagger:
     build:
       context: .

@@ -2,9 +2,6 @@ package main
 
 import (
 	"app_name/api/config"
-	"app_name/api/handlers"
-	"app_name/api/repositories"
-	"app_name/api/services"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -22,16 +19,6 @@ func NewAPIApplication(cfg *config.Config, router *gin.Engine, db *gorm.DB) APIA
 		router: router,
 		db:     db,
 	}
-}
-
-func setupRouter(db *gorm.DB) *gin.Engine {
-	r := gin.Default()
-
-	defo := handlers.NewDefault(services.NewDefault(repositories.NewDefault(db)))
-
-	r.GET("/", defo.Ping)
-
-	return r
 }
 
 func main() {
