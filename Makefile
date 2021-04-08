@@ -33,11 +33,11 @@ ssh-api:
 ssh-mysql:
 	docker exec -it app_name-mysql /bin/bash
 
+# applyは手動でやること
+# terraform apply
 # terraform:
 # 	terraform init
 # 	terraform plan
-	# applyは手動でやること
-	# terraform apply
 
 # new:
 # 	./scripts/new_migration.sh

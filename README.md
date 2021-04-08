@@ -14,39 +14,47 @@ gin + gorm + mysql のディレクトリをざっくり作るよ
 ├── Dockerfile
 ├── Makefile
 ├── README.md
-├── api
+├── app
+│   ├── cmd
+│   │   ├── main.go
+│   │   ├── wire.go
+│   │   └── wire_gen.go
 │   ├── config
 │   │   ├── config.yaml
 │   │   ├── database.go
-│   │   └── definition.go
+│   │   ├── definition.go
+│   │   └── router.go
 │   ├── db
-│   │   ├── conf.d
-│   │   │   └── mysql.conf
-│   │   └── migrations
+│   │   └── conf.d
 │   ├── handlers
 │   │   ├── default.go
 │   │   └── default_test.go
 │   ├── log
 │   │   └── mysql
-│   ├── main.go
 │   ├── middlewares
 │   ├── models
-│   │   ├── repositories
-│   │   └── services
-│   └── responses
-│       └── error.go
+│   ├── repositories
+│   │   └── default.go
+│   ├── responses
+│   │   ├── error.go
+│   │   └── success.go
+│   └── services
+│       └── default.go
+├── cover.html
+├── cover.out
 ├── docker
-│   └── swagger
-│       └── swagger.yml
+│   └── mysql
+│       ├── conf.d
+│       │   └── mysql.conf
+│       └── log
 ├── docker-compose.yml
 ├── go.mod
 ├── go.sum
-├── swagger
-│   ├── Dockerfile
-│   └── swagger.yml
-└── terraform
-    ├── config.tf
-    └── ecr.tf
+├── scripts
+│   └── new_migration.sh
+└── swagger
+    ├── Dockerfile
+    └── swagger.yml
 ```
 
 # app_name
@@ -67,7 +75,8 @@ or
 $ cd api && go run main.go
 ```
 
-migrationファイル作成のためのbrew
+migration ファイル作成のための brew
+
 ```shell
 $ brew install golang-migrate
 ```
