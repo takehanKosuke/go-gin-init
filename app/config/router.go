@@ -1,9 +1,9 @@
 package config
 
 import (
-	"app_name/api/handlers"
-	"app_name/api/repositories"
-	"app_name/api/services"
+	"app_name/app/handlers"
+	"app_name/app/repositories"
+	"app_name/app/services"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"

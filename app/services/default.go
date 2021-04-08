@@ -1,6 +1,6 @@
 package services
 
-import "app_name/api/repositories"
+import "app_name/app/repositories"
 
 type Default interface {
 	Ping()

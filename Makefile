@@ -1,5 +1,5 @@
-# new:
-# 	./new_gin.sh
+new:
+	./new_gin.sh
 
 up:
 	docker-compose up --build -d
@@ -8,9 +8,9 @@ down:
 	docker-compose down
 
 local:
-	# docker build -t app_name-api ./api
+	# docker build -t app_name-api ./app
 	# docker run -e MYSQL_HOST=host.docker.internal --rm --name app_name-api_1 -p 8080:8080 app_name-api
-	go run ./api/main.go ./api/wire_gen.go
+	go run ./app/cmd/main.go ./app/cmd/wire_gen.go
 
 generate:
 	go generate ./...
@@ -39,8 +39,8 @@ ssh-mysql:
 	# applyは手動でやること
 	# terraform apply
 
-new:
-	./scripts/new_migration.sh
+# new:
+# 	./scripts/new_migration.sh
 
 models:
 	./scripts/new_model.sh

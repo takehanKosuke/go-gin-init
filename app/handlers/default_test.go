@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"app_name/api/config"
-	"app_name/api/repositories"
-	"app_name/api/services"
+	"app_name/app/config"
+	"app_name/app/repositories"
+	"app_name/app/services"
 	"fmt"
 	"net/http"
 	"net/http/httptest"

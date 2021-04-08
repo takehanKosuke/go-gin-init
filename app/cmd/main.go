@@ -1,7 +1,7 @@
 package main
 
 import (
-	"app_name/api/config"
+	"app_name/app/config"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"

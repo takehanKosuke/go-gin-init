@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"app_name/api/services"
+	"app_name/app/services"
 
 	"github.com/gin-gonic/gin"
 )

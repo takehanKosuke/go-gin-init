@@ -6,7 +6,7 @@
 package main
 
 import (
-	"app_name/api/config"
+	"app_name/app/config"
 )
 
 // Injectors from wire.go:
