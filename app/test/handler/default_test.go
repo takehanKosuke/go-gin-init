@@ -2,8 +2,10 @@ package handlers
 
 import (
 	"app_name/app/config"
+	"app_name/app/handlers"
 	"app_name/app/repositories"
 	"app_name/app/services"
+	"app_name/app/test"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -17,10 +19,7 @@ import (
 func TestPing(t *testing.T) {
 	t.Parallel()
 	asserts := assert.New(t)
-	cfg, err := config.Load()
-	if err != nil {
-		panic(err)
-	}
+	cfg := test.LoadConfig()
 
 	db := config.ConnectDB(cfg)
 
@@ -44,7 +43,7 @@ func TestPing(t *testing.T) {
 			req, _ := http.NewRequest("GET", "/", nil)
 			ginContext.Request = req
 
-			NewDefault(services.NewDefault(repositories.NewDefault(db))).Ping(ginContext)
+			handlers.NewDefault(services.NewDefault(repositories.NewDefault(db))).Ping(ginContext)
 			asserts.Equal(td.outputStatus, recorder.Code)
 			if td.outputJSON != "" {
 				asserts.JSONEq(td.outputJSON, recorder.Body.String())

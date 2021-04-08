@@ -27,6 +27,9 @@ cover:
 lint:
 	golangci-lint run -E golint
 
+test:
+	go test ./...
+
 ssh-api:
 	docker exec -it app_name-api_1 /bin/bash
 

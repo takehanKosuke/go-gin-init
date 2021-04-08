@@ -1,18 +1,18 @@
 version: "3"
 services:
-  # api:
+  # app:
   #   build:
   #     context: .
   #     dockerfile: ./Dockerfile
   #   restart: always
-  #   container_name: app_name-api
+  #   environment:
+  #     MYSQL_HOST: host.docker.internal
   #   ports:
   #     - "8080:8080"
 
   mysql:
     image: mysql:8.0
     restart: always
-    container_name: app_name-mysql
     environment:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
@@ -27,7 +27,6 @@ services:
     build:
       context: .
       dockerfile: ./swagger/Dockerfile
-    container_name: app_name-swagger
     volumes:
       - ./swagger/swagger.yml:/usr/share/nginx/html/sample.yaml
     environment:

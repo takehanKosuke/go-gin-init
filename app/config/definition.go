@@ -23,6 +23,7 @@ func Load() (*Config, error) {
 	v := viper.New()
 	v.SetConfigName("config")
 	v.SetConfigType("yaml")
+	v.AddConfigPath("$PWD/../../config/")
 	v.AddConfigPath("app/config/")
 
 	v.AutomaticEnv()
