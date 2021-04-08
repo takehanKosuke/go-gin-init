@@ -22,6 +22,8 @@ func ConnectDB(cfg *Config) *gorm.DB {
 
 	db, err := gorm.Open("mysql", connect)
 
+	fmt.Printf("==========%#v\n", connect)
+
 	if err != nil {
 		panic(err.Error())
 	}
