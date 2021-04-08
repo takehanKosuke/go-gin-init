@@ -1,0 +1,50 @@
+up:
+	docker-compose up --build -d
+
+down:
+	docker-compose down
+
+# ローカル環境でGoサーバーを起動
+local:
+	# docker build -t app_name-api ./app
+	# docker run -e MYSQL_HOST=host.docker.internal --rm --name app_name-api_1 -p 8080:8080 app_name-api
+	go run ./app/cmd/main.go ./app/cmd/wire_gen.go
+
+generate:
+	go generate ./...
+
+# テストカバレッジをhtmlで表示する
+cover:
+	go test -cover ./... -coverprofile=cover.out.tmp
+	# 自動生成コードをカバレッジ対象から外し、カバレッジファイルを作成
+	cat cover.out.tmp | grep -v "wire_gen.go" > cover.out
+	rm cover.out.tmp
+	go tool cover -html=cover.out -o cover.html
+	open cover.html
+
+lint:
+	golangci-lint run -E golint
+
+test:
+	go test ./...
+
+# docker上のGoサーバーに入る
+ssh-api:
+	docker exec -it app_name-api_1 /bin/bash
+
+# docker上のMysqlに入る
+ssh-mysql:
+	docker exec -it app_name-mysql /bin/bash
+
+# migrationファイルの新規作成コマンド
+new:
+	./scripts/new_migration.sh
+
+migrate-up:
+	migrate -source file://docker/mysql/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' up
+
+migrate-down:
+	migrate -source file://docker/mysql/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' down
+
+migrate-ver:
+	migrate -source file://docker/mysql/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' version

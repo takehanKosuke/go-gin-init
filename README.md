@@ -15,43 +15,43 @@ gin + gorm + mysql のディレクトリをざっくり作るよ
 ├── Makefile
 ├── README.md
 ├── app
-│   ├── cmd
-│   │   ├── main.go
-│   │   ├── wire.go
-│   │   └── wire_gen.go
-│   ├── config
-│   │   ├── config.yaml
-│   │   ├── database.go
-│   │   ├── definition.go
-│   │   └── router.go
-│   ├── db
-│   │   └── conf.d
-│   ├── handlers
-│   │   ├── default.go
-│   │   └── default_test.go
-│   ├── log
-│   │   └── mysql
-│   ├── middlewares
-│   ├── models
-│   ├── repositories
-│   │   └── default.go
-│   ├── responses
-│   │   ├── error.go
-│   │   └── success.go
-│   └── services
-│       └── default.go
-├── cover.html
-├── cover.out
+│   ├── cmd
+│   │   ├── main.go
+│   │   ├── wire.go
+│   │   └── wire_gen.go
+│   ├── config
+│   │   ├── config.yaml
+│   │   ├── database.go
+│   │   ├── definition.go
+│   │   └── router.go
+│   ├── db
+│   │   └── conf.d
+│   ├── handlers
+│   │   └── default.go
+│   ├── log
+│   │   └── mysql
+│   ├── middlewares
+│   ├── models
+│   ├── repositories
+│   │   └── default.go
+│   ├── responses
+│   │   ├── error.go
+│   │   └── success.go
+│   ├── services
+│   │   └── default.go
+│   └── test
+│       ├── handler
+│       │   └── default_test.go
+│       └── helper.go
 ├── docker
-│   └── mysql
-│       ├── conf.d
-│       │   └── mysql.conf
-│       └── log
+│   └── mysql
+│       ├── conf.d
+│       │   └── mysql.conf
+│       └── log
 ├── docker-compose.yml
 ├── go.mod
-├── go.sum
 ├── scripts
-│   └── new_migration.sh
+│   └── new_migration.sh
 └── swagger
     ├── Dockerfile
     └── swagger.yml
@@ -61,40 +61,32 @@ gin + gorm + mysql のディレクトリをざっくり作るよ
 
 ## Getting Started（開始方法）
 
-基本方針としては mysql などは全て docker-compose で立ち上げ、 メインサーバはそれぞれ docker run するようにする
-
-```shell
-#dbとかの実行
-$ make up
-```
-
-```shell
-# apiサーバの実行
-$ make local
-or
-$ cd api && go run main.go
-```
-
 migration ファイル作成のための brew
 
 ```shell
 $ brew install golang-migrate
 ```
 
-### Prerequisites（前提条件）
+## Mysql, Swagger の立ち上げ
 
-使用言語やフレームワーク
-必要なミドルウェアとそのインストール方法
+```
+make up
+```
 
-### Installing
+swagger url: `http://localhost:3000/`
 
-ローカル環境で動かすための手順を記述していく
-最終的にどのような画面になれば適切に動かすことができているかを記述する
+## Go サーバーの立ち上げ(ローカルの環境で)
 
-## Running the tests(テスト方法を記述)
+```
+make local
+```
 
-テストを動かすための手順を記述する
+※docker 上で立ち上げたい場合は`docker-compose.yaml`のコメントアウトしてる箇所のコメントを外すことで docker でサーバーを立てることができる
 
-## Deployment（デプロイ）
+## Tips
 
-デプロイをする方法やどのような構成担っているかを説明する
+基本的な Tips は全て`Makefile`に記述してあるためそちらを参照すること
+
+## その他
+
+`default`というパッケージやファイルがあるが、それらは全て例として作成したものなので削除して使うこと。

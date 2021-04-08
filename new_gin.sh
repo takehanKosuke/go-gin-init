@@ -25,9 +25,12 @@ cp -R ./ $make_path/$project_name
 grep -lr 'app_name' $make_path/$project_name/ | xargs sed -i -e "s/app_name/${project_name}/g"
 find $make_path/$project_name/* -name "*-e" -exec rm {} \;
 
-# 最初に使用するためのmakeファイルを削除
-sed -e '1,3d' $make_path/$project_name/Makefile > $make_path/$project_name/Makefiletmp
-mv $make_path/$project_name/Makefiletmp $make_path/$project_name/Makefile
+# makefileを適切なものに変更
+rm $make_path/$project_name/Makefile
+mv $make_path/$project_name/Makefile_new $make_path/$project_name/Makefile
+
 
 # このファイルを削除
 rm $make_path/$project_name/new_gin.sh
+
+echo '🎉作成が完了しました🎉'
