@@ -9,3 +9,4 @@ terraform.tfstate
 terraform.tfvars
 .terraform
 /pb
+proto_doc.html

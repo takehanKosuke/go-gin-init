@@ -10,7 +10,7 @@ message GetArticlesResponse {
 }
 
 message GetArticlesRequest {
-  int32 par = 1;
+  int32 per = 1;
   int32 limit = 2;
 }
 

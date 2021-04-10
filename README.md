@@ -87,6 +87,23 @@ make local
 
 基本的な Tips は全て`Makefile`に記述してあるためそちらを参照すること
 
+## エラー解決
+
+`make proto` とした時に
+
+```
+Please specify a program using absolute path or make sure the program is available in your PATH system variable」と言うエラーが出る場合
+```
+
+と言うようなエラーが吐かれた時は
+
+```
+export GOPATH=$HOME/go
+PATH=$PATH:$GOPATH/bin
+```
+
+を.zshrc に追加することで解決する
+
 ## その他
 
 `default`というパッケージやファイルがあるが、それらは全て例として作成したものなので削除して使うこと。

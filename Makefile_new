@@ -29,7 +29,10 @@ test:
 	go test ./... -v
 
 proto:
+	# protoコードを生成
 	protoc -I . --go_out=plugins=grpc:. ./proto/*.proto
+	# ドキュメントを生成
+	protoc --doc_out=html,proto_doc.html:. ./proto/*.proto
 
 # docker上のGoサーバーに入る
 ssh-api:
