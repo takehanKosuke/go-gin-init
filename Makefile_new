@@ -26,7 +26,10 @@ lint:
 	golangci-lint run -E golint
 
 test:
-	go test ./...
+	go test ./... -v
+
+proto:
+	protoc -I . --go_out=plugins=grpc:. ./proto/*.proto
 
 # docker上のGoサーバーに入る
 ssh-api:

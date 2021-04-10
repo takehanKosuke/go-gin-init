@@ -1,0 +1,27 @@
+syntax = "proto3";
+package models;
+
+import "google/protobuf/timestamp.proto";
+option go_package = "/pb";
+
+message Empty {}
+
+enum UserType {
+  NOT_FOUND = 0;
+  DEFAULT = 1;
+  RETWEET = 2;
+  REPLY = 3;
+}
+
+message Article {
+  string id = 1;
+  string content = 2;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  int32 age = 8;
+  google.protobuf.Timestamp created_at = 11;
+}

@@ -8,3 +8,4 @@ cover.out
 terraform.tfstate
 terraform.tfvars
 .terraform
+/pb
