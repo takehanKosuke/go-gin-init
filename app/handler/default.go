@@ -1,7 +1,7 @@
-package handlers
+package handler
 
 import (
-	"app_name/app/services"
+	"app_name/app/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,11 +13,11 @@ type Default interface {
 
 // DefaultImpl DefaultImpl struct
 type DefaultImpl struct {
-	service services.Default
+	service service.Default
 }
 
 // NewDefault 新規Default structを作成
-func NewDefault(service services.Default) Default {
+func NewDefault(service service.Default) Default {
 	return &DefaultImpl{
 		service: service,
 	}

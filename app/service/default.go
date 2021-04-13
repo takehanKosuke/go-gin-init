@@ -1,16 +1,16 @@
-package services
+package service
 
-import "app_name/app/repositories"
+import "app_name/app/repository"
 
 type Default interface {
 	Ping()
 }
 
 type DefaultImpl struct {
-	repository repositories.Default
+	repository repository.Default
 }
 
-func NewDefault(repository repositories.Default) Default {
+func NewDefault(repository repository.Default) Default {
 	return &DefaultImpl{repository: repository}
 }
 
