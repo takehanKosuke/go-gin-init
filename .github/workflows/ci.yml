@@ -54,4 +54,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: test
         run: |
-          go test ./... -v
+          curl -L https://packagecloud.io/golang-migrate/migrate/gpgkey | sudo apt-key add - && sudo touch /etc/apt/sources.list.d/migrate.list && echo "deb https://packagecloud.io/golang-migrate/migrate/ubuntu/ $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/migrate.list
+          sudo apt-get update && sudo apt-get install -y migrate
+          migrate -source file://app/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' up
+          ENV=test go test ./... -v

@@ -7,6 +7,9 @@ package main
 
 import (
 	"app_name/app/config"
+	"app_name/app/handler"
+	"app_name/app/repository"
+	"app_name/app/service"
 )
 
 // Injectors from wire.go:
@@ -17,7 +20,10 @@ func InitializeApplication() (APIApplication, error) {
 		return APIApplication{}, err
 	}
 	db := config.ConnectDB(configConfig)
-	engine := config.SetupRouter(db)
+	repositoryDefault := repository.NewDefault(db)
+	serviceDefault := service.NewDefault(repositoryDefault)
+	handlerDefault := handler.NewDefault(serviceDefault)
+	engine := config.SetupRouter(handlerDefault)
 	apiApplication := NewAPIApplication(configConfig, engine, db)
 	return apiApplication, nil
 }

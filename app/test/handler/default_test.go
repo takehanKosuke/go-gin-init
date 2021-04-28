@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"app_name/app/config"
-	"app_name/app/handlers"
-	"app_name/app/repositories"
-	"app_name/app/services"
+	"app_name/app/handler"
+	"app_name/app/repository"
+	"app_name/app/service"
 	"app_name/app/test"
 	"fmt"
 	"net/http"
@@ -43,7 +43,7 @@ func TestPing(t *testing.T) {
 			req, _ := http.NewRequest("GET", "/", nil)
 			ginContext.Request = req
 
-			handlers.NewDefault(services.NewDefault(repositories.NewDefault(db))).Ping(ginContext)
+			handler.NewDefault(service.NewDefault(repository.NewDefault(db))).Ping(ginContext)
 			asserts.Equal(td.outputStatus, recorder.Code)
 			if td.outputJSON != "" {
 				asserts.JSONEq(td.outputJSON, recorder.Body.String())

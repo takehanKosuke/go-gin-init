@@ -1,4 +1,4 @@
-FROM golang:1.14
+FROM golang:1.16.3
 
 COPY ./app /app_name/app
 COPY ./go.mod /app_name/
