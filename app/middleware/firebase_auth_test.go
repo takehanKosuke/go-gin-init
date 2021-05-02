@@ -33,7 +33,7 @@ func TestAuthentication(t *testing.T) {
 			outputToken: &auth.Token{
 				UID: dummyIDToken,
 			},
-			err:       nil,
+			err: nil,
 		},
 		{
 			name:        "tokenがinvlidする",

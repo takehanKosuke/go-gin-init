@@ -3,10 +3,9 @@ package config
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 
-	// mysql driver
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"gorm.io/driver/mysql"
 )
 
 // ConnectDB connect db
@@ -20,7 +19,7 @@ func ConnectDB(cfg *Config) *gorm.DB {
 	)
 	var err error
 
-	db, err := gorm.Open("mysql", connect)
+	db, err := gorm.Open(mysql.Open(connect), &gorm.Config{})
 
 	if err != nil {
 		panic(err.Error())
