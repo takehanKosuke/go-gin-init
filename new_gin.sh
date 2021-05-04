@@ -29,6 +29,8 @@ find $make_path/$project_name/* -name "*-e" -exec rm {} \;
 rm $make_path/$project_name/Makefile
 mv $make_path/$project_name/Makefile_new $make_path/$project_name/Makefile
 
+# 不要なmigration fileを削除
+rm $make_path/$project_name/db/migrations/*.sql
 
 # このファイルを削除
 rm $make_path/$project_name/new_gin.sh

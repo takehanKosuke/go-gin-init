@@ -8,6 +8,7 @@ import (
 	"google.golang.org/api/option"
 )
 
+//nolint
 // firebaseAuthClient firebase authのclientを作成
 func firebaseAuthClient() *auth.Client {
 	ctx := context.Background()
@@ -24,4 +25,15 @@ func firebaseAuthClient() *auth.Client {
 	}
 
 	return firebaseAuthClient
+}
+
+// 以下mock用コードなので削除すること
+type MockFirebaseClient struct{}
+
+func newMockFirebaseAuthClient() *MockFirebaseClient {
+	return &MockFirebaseClient{}
+}
+
+func (m *MockFirebaseClient) VerifyIDToken(ctx context.Context, idToken string) (*auth.Token, error) {
+	return nil, nil
 }

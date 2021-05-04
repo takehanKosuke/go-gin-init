@@ -10,17 +10,17 @@ import (
 func SetupRouter(
 	// すべてのmiddlewareを記述する
 
-
 	// すべてのhandlerを記述する
 	defaultHandler handler.Default,
-	) *gin.Engine {
+) *gin.Engine {
 	r := gin.Default()
 
-	authMiddleware := middleware.NewFirebaseAuth(firebaseAuthClient())
+	authMiddleware := middleware.NewFirebaseAuth(newMockFirebaseAuthClient())
+	// authMiddleware := middleware.NewFirebaseAuth(firebaseAuthClient())
 	r.Use(authMiddleware.Authentication)
 
 	// NewHandler
-	defo := defaultHandler 
+	defo := defaultHandler
 
 	// Routing
 	r.GET("/", defo.Ping)
