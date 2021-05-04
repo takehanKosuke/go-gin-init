@@ -28,6 +28,13 @@ lint:
 test:
 	go test ./... -v
 
+login_gcp:
+	gcloud auth application-default login
+
+cloud_run_apply: login_gcp
+	cd ./terraform && terraform init
+	cd ./terraform && GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json terraform apply
+
 proto:
 	# protoコードを生成
 	protoc -I . --go_out=plugins=grpc:. ./proto/*.proto

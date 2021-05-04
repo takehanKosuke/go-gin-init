@@ -7,6 +7,8 @@ cover.html
 cover.out
 terraform.tfstate
 terraform.tfvars
+cloud_sql_proxy
+terraform.tfstate.backup
 .terraform
 ./pb
 proto_doc.html
