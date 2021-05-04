@@ -9,7 +9,22 @@
 
 name: go-ci
 
-on: [push]
+on:
+  push:
+    branches:
+      # - main
+      # - develop
+      # ↓使用するときは削除すること
+      - tmp
+
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  SLACK_ICON: https://pbs.twimg.com/profile_images/907259030678142982/cwfh5ljg_400x400.jpg
+  # ↓送信するチャンネル名を加筆すること
+  SLACK_CHANNEL: チャンネル名
+  SLACK_USERNAME: Deploy Bot
+
+
 jobs:
   deploy:
     needs: [build, format, test]
