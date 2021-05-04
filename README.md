@@ -11,50 +11,28 @@ gin + gorm + mysql のディレクトリをざっくり作るよ
 
 ```
 .
-├── Dockerfile
-├── Makefile
-├── README.md
 ├── app
-│   ├── cmd
-│   │   ├── main.go
-│   │   ├── wire.go
-│   │   └── wire_gen.go
-│   ├── config
-│   │   ├── config.yaml
-│   │   ├── database.go
-│   │   ├── definition.go
-│   │   └── router.go
-│   ├── db
-│   │   └── conf.d
-│   ├── handlers
-│   │   └── default.go
-│   ├── log
-│   │   └── mysql
-│   ├── middlewares
-│   ├── models
-│   ├── repositories
-│   │   └── default.go
-│   ├── responses
-│   │   ├── error.go
-│   │   └── success.go
-│   ├── services
-│   │   └── default.go
-│   └── test
-│       ├── handler
-│       │   └── default_test.go
-│       └── helper.go
+│   ├── cmd
+│   ├── config
+│   ├── db
+│   │   └── migrations
+│   ├── handler
+│   ├── middleware
+│   │   └── mock_middleware
+│   ├── repository
+│   │   └── mock_repository
+│   ├── response
+│   ├── service
+│   └── test
+│       └── handler
 ├── docker
-│   └── mysql
-│       ├── conf.d
-│       │   └── mysql.conf
-│       └── log
-├── docker-compose.yml
-├── go.mod
+│   ├── mysql
+│   │   ├── conf.d
+│   │   └── log
+│   └── swagger
+├── proto
 ├── scripts
-│   └── new_migration.sh
-└── swagger
-    ├── Dockerfile
-    └── swagger.yml
+└── terraform
 ```
 
 # app_name
@@ -63,8 +41,14 @@ gin + gorm + mysql のディレクトリをざっくり作るよ
 
 migration ファイル作成のための brew
 
-```shell
-$ brew install golang-migrate
+```
+brew install golang-migrate
+```
+
+mockgen の install
+
+```
+go install github.com/golang/mock/mockgen@v1.5.0
 ```
 
 ## Mysql, Swagger の立ち上げ
@@ -86,6 +70,21 @@ make local
 ## Tips
 
 基本的な Tips は全て`Makefile`に記述してあるためそちらを参照すること
+
+## cloud run でのデプロイ
+
+1. コンソール画面から新規プロジェクト`app_name`を作成
+   https://console.cloud.google.com/projectselector2/home/dashboard
+
+2. cloud run api を有効化
+
+3. `./terraform/variable.tf` の project 部分を作成した project id に書き換える
+
+4. `make cloud_run_apply` をすることで
+   - cloud run
+   - cloud sql
+   - container registry
+     の 3 つを作成する
 
 ## エラー解決
 

@@ -32,8 +32,8 @@ login_gcp:
 	gcloud auth application-default login
 
 cloud_run_apply: login_gcp
-	terraform init
-	GOOGLE_APPLICATION_CREDENTIALS=$HOME/.config/gcloud/application_default_credentials.json; terraform apply
+	cd ./terraform && terraform init
+	cd ./terraform && GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json terraform apply
 
 proto:
 	# protoコードを生成

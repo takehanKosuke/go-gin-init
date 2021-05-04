@@ -22,8 +22,7 @@ services:
     volumes:
       - ./docker/mysql/conf.d:/etc/mysql/conf.d
       - ./docker/mysql/log:/var/log/mysql
-  swagger:
-    build: ./docker/swagger
-    ports:
-      - "3000:8080" # `http://localhost:3000/` で起動
-
+  # swagger:
+  #   build: ./docker/swagger
+  #   ports:
+  #     - "3000:8080" # `http://localhost:3000/` で起動

@@ -3,6 +3,7 @@ variable "region" {
 }
 
 variable "project" {
+  # ここの変数名をプロジェクトのidに変更してください
   default = "app_name"
 }
 
