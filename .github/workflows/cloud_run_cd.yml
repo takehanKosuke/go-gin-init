@@ -1,0 +1,85 @@
+# cloudRun用のcd ymlです。
+# github actionに
+# GCP_PROJECT_ID = プロジェクト名
+# GCP_SA_KEY = credential.jsonを→　`cat base64 ./path/to/credential.json` でbase64に変更しその変更されたbase64コードを登録する
+# PRD_SERVER_NAME = prd環境用のcloud runサーバー名
+# STG_SERVER_NAME = stg環境用のcloud runサーバー名
+
+# SLACK_WEBHOOK_URL = slackのwebhookURLを追加
+
+name: go-ci
+
+on:
+  push:
+    branches:
+      # - main
+      # - develop
+      # ↓使用するときは削除すること
+      - tmp
+
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  SLACK_ICON: https://pbs.twimg.com/profile_images/907259030678142982/cwfh5ljg_400x400.jpg
+  # ↓送信するチャンネル名を加筆すること
+  SLACK_CHANNEL: チャンネル名
+  SLACK_USERNAME: Deploy Bot
+
+
+jobs:
+  deploy:
+    needs: [build, format, test]
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: stg環境用の環境変数をセット
+        if: github.ref == 'refs/heads/develop'
+        run: echo "SERVER_NAME=${{ secrets.STG_SERVER_NAME }}" >> $GITHUB_ENV
+      - name: production環境用の環境変数をセット
+        if: github.ref == 'refs/heads/main'
+        run: echo "SERVER_NAME=${{ secrets.PRD_SERVER_NAME }}" >> $GITHUB_ENV
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Configure docker to use the gcloud cli
+        run: gcloud auth configure-docker --quiet
+
+      - name: docker imageをビルド
+        run: docker build . -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/$SERVER_NAME:${{ github.sha }} -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/$SERVER_NAME:latest
+
+      - name: docker imageをプッシュ
+        run: docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/$SERVER_NAME:${{ github.sha }} && docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/$SERVER_NAME:latest
+
+      - name: Cloud Runにデプロイ
+        run: |
+          gcloud run deploy $SERVER_NAME \
+            --image asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/$SERVER_NAME \
+            --project ${{ secrets.GCP_PROJECT_ID }} \
+            --region asia-northeast1 \
+            --platform managed \
+            --quiet
+
+
+      # 適切に処理が終了したときにslackに成功メッセージを飛ばす
+      - name: Slack Notification on Success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2.0.2
+        env:
+          SLACK_TITLE: Deploy Success🎉
+          SLACK_COLOR: good
+
+      # 処理が異常終了したときにslackに失敗メッセージを飛ばす
+      - name: Slack Notification on Failure
+        uses: rtCamp/action-slack-notify@v2.0.2
+        if: failure()
+        env:
+          SLACK_TITLE: ⚠️Deploy Failure
+          SLACK_COLOR: danger
+          SLACK_MESSAGE: <!channel>デプロイに失敗しました。確認してください
