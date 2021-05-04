@@ -8,6 +8,7 @@ import (
 	"google.golang.org/api/option"
 )
 
+//nolint
 // firebaseAuthClient firebase authのclientを作成
 func firebaseAuthClient() *auth.Client {
 	ctx := context.Background()

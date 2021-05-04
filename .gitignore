@@ -8,5 +8,5 @@ cover.out
 terraform.tfstate
 terraform.tfvars
 .terraform
-/pb
+./pb
 proto_doc.html
