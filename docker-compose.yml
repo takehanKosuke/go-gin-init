@@ -6,7 +6,7 @@ services:
   #     dockerfile: ./Dockerfile
   #   restart: always
   #   environment:
-  #     MYSQL_HOST: host.docker.internal
+  #     MYSQL_HOST: mysql
   #   ports:
   #     - "8080:8080"
 
