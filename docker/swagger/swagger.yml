@@ -4,35 +4,35 @@ info:
   version: 1.0.0
   description: ここにはアプリの説明文が入ります
 servers:
-  - url: http://localhost:3000/
+  - url: 'http://localhost:3000/'
     description: ローカルサーバ
 paths:
-  /user:
+  /users:
     get:
       tags:
-        - "user"
-      summary: "user一覧を表示する"
-      description: "ここはAPIの詳細を書きます"
-      operationId: "getUserAll"
+        - user
+      summary: user一覧を表示する
+      description: ここはAPIの詳細を書きます
+      operationId: getUserAll
       responses:
-        "200":
+        '200':
           description: ok
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        500:
-          $ref: "#/components/responses/InternalServerError"
+                  $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     post:
       tags:
-        - "user"
-      summary: "userを新規作成する"
-      description: "ここはAPIの詳細を書きます"
-      operationId: "createUser"
+        - user
+      summary: userを新規作成する
+      description: ここはAPIの詳細を書きます
+      operationId: createUser
       requestBody:
         content:
           application/json:
@@ -40,36 +40,37 @@ paths:
               type: object
               properties:
                 name:
-                  type: "string"
+                  type: string
                 email:
-                  type: "string"
-                  format: "email"
+                  type: string
+                  format: email
                 rating:
-                  type: "number"
-                  format: "float"
+                  type: number
+                  format: float
                 is_accept:
-                  type: "boolean"
+                  type: boolean
               required:
                 - name
                 - email
       responses:
-        200:
-          description: "特定のuserを返します"
+        '200':
+          description: 特定のuserを返します
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /user/{id}:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    parameters: []
+  '/users/{id}':
     get:
       tags:
-        - "user"
-      summary: "idで特定のuserを返します"
-      description: "ここはAPIの詳細を書きます"
-      operationId: "getUserByName"
+        - user
+      summary: idで特定のuserを返します
+      description: ここはAPIの詳細を書きます
+      operationId: getUserByName
       parameters:
         - name: id
           in: path
@@ -78,22 +79,22 @@ paths:
           schema:
             type: string
       responses:
-        200:
-          description: "特定のuserを返します"
+        '200':
+          description: 特定のuserを返します
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        500:
-          $ref: "#/components/responses/InternalServerError"
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     put:
       tags:
-        - "user"
-      summary: "userの更新"
-      description: "ここはAPIの詳細を書きます"
-      operationId: "updateUser"
+        - user
+      summary: userの更新
+      description: ここはAPIの詳細を書きます
+      operationId: updateUser
       parameters:
         - name: id
           in: path
@@ -108,26 +109,26 @@ paths:
               type: object
               properties:
                 name:
-                  type: "string"
+                  type: string
                 email:
-                  type: "string"
-                  format: "email"
+                  type: string
+                  format: email
                 rating:
-                  type: "number"
-                  format: "float"
+                  type: number
+                  format: float
                 is_accept:
-                  type: "boolean"
+                  type: boolean
       responses:
-        400:
-          $ref: "#/components/responses/BadRequest"
-        500:
-          $ref: "#/components/responses/InternalServerError"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
-        - "user"
-      summary: "userの削除"
-      description: "ここはAPIの詳細を書きます"
-      operationId: "deleteUser"
+        - user
+      summary: userの削除
+      description: ここはAPIの詳細を書きます
+      operationId: deleteUser
       parameters:
         - name: id
           in: path
@@ -136,10 +137,16 @@ paths:
           schema:
             type: string
       responses:
-        400:
-          $ref: "#/components/responses/BadRequest"
-        500:
-          $ref: "#/components/responses/InternalServerError"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
 components:
   responses:
     BadRequest:
@@ -147,30 +154,30 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: '#/components/schemas/Error'
     InternalServerError:
       description: Internal server error
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: '#/components/schemas/Error'
   schemas:
     User:
-      type: "object"
+      type: object
       properties:
         id:
-          type: "string"
-          format: "uuid"
+          type: string
+          format: uuid
         name:
-          type: "string"
+          type: string
         email:
-          type: "string"
-          format: "email"
+          type: string
+          format: email
         rating:
-          type: "number"
-          format: "float"
+          type: number
+          format: float
         is_accept:
-          type: "boolean"
+          type: boolean
         created_at:
           type: string
           format: date-time

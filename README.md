@@ -71,6 +71,14 @@ make local
 
 基本的な Tips は全て`Makefile`に記述してあるためそちらを参照すること
 
+## swaggerの変更について
+
+swaggerは `stoplight studio`を用いて記述していくことを前提としているためあえて1ファイルに全てのデータの記述を行なっている
+
+```
+brew install --cask stoplight-studio
+```
+
 ## cloud run でのデプロイ
 
 1. コンソール画面から新規プロジェクト`app_name`を作成
