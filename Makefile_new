@@ -61,3 +61,9 @@ migrate-down:
 
 migrate-ver:
 	migrate -source file://app/db/migrations/ -database 'mysql://root:password@tcp(127.0.0.1:3306)/app_name' version
+
+api-generate:
+	docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+		-i local/docker/swagger/swagger.yml \
+		-g go-gin-server \
+		-o /local/out/go
