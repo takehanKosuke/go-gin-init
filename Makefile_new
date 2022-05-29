@@ -35,12 +35,6 @@ cloud_run_apply: login_gcp
 	cd ./terraform && terraform init
 	cd ./terraform && GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json terraform apply
 
-proto:
-	# protoコードを生成
-	protoc -I . --go_out=plugins=grpc:. ./proto/*.proto
-	# ドキュメントを生成
-	protoc --doc_out=html,proto_doc.html:. ./proto/*.proto
-
 # docker上のGoサーバーに入る
 ssh-api:
 	docker exec -it app_name-api_1 /bin/bash
@@ -64,6 +58,12 @@ migrate-ver:
 
 api-generate:
 	docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
-		-i local/docker/swagger/swagger.yml \
+		-i local/swagger/index.yml \
 		-g go-gin-server \
 		-o /local/out/go
+
+dart-cliant-generate:
+	docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+		-i local/swagger/index.yml \
+		-g dart \
+		-o /local/out/dart
